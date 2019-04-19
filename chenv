@@ -1,0 +1,56 @@
+#!/bin/bash -l
+
+set -feu
+
+ENVS="$HOME/.env"
+
+_chenv_exists() {
+	# Provide nice hint if env doesn't exist
+	if [[ ! -f "$1" ]]; then
+		>&2 echo "no such env: $1"
+		return 1
+	fi
+
+	return 0
+}
+
+_chenv_usage(){
+	echo "Usage: chenv [-l] [-c|-e] <env>"
+	echo "	-l : list environments"
+	echo "	-c : show an environment"
+	echo "	-e : edit environment with $VISUAL"
+	echo "	-h : show help output"
+}
+
+args=$(getopt c:e:lh $*)
+
+# Spit usage if getopt failed or if called with no arguments
+if [[ $? -ne 0 || $# -eq 0 ]]; then
+	_chenv_usage
+	exit 127
+fi
+set -- $args
+
+# Process args
+for i; do
+	case "$i"
+	in
+		-h)
+			_chenv_usage
+			exit 0;;
+		-l)
+			ls "$ENVS"
+			exit 0;;
+		-c)
+			_chenv_exists "$ENVS/$2" && cat "$ENVS/$2"
+			exit 0;;
+		-e)
+			$VISUAL "$ENVS/$2"
+			exit $?;;
+		--)
+			shift; break;;
+	esac
+done
+
+# Spawn a new shell with the environment if it exists
+_chenv_exists "$ENVS/$1" && env PS1="($1) $PS1" $SHELL --rcfile "$ENVS/$1" -i
