@@ -50,6 +50,7 @@ for i; do
 			_chenv_exists "$ENVS/$2" && cat "$ENVS/$2"
 			exit 0;;
 		-e)
+			mkdir -p $ENVS
 			$VISUAL "$ENVS/$2"
 			exit $?;;
 		--)
