@@ -30,6 +30,19 @@ Now, you can run `chenv vault` and be dropped into a shell with those
 variables set. At any time you can `exit` (or `^D`) to return to your
 normal shell.
 
+## Install ##
+
+Just copy the `chenv` file from this repo to somewhere on your $PATH. A good
+choice for this is usually `/usr/local/bin`:
+
+```sh
+sudo cp chenv /usr/local/bin/chenv
+sudo chmod 755 /usr/local/bin/chenv
+```
+
+Then try `chenv` to see if you get help output. If not, inspect your $PATH to
+find somewhere else to put it (`echo "$PATH"`).
+
 ## Options ##
 
 chenv's `-h` option should tell you all that you need to know (note that my
@@ -43,7 +56,6 @@ Usage: chenv [-l] [-c|-e] <env>
     -e : edit environment with nvim
     -h : show help output
 ```
-
 
 ## Protip: Storing Secrets ##
 
