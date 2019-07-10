@@ -4,6 +4,11 @@ set -feu
 
 ENVS="$HOME/.env"
 
+# Set defaults if they don't already exist.
+PS1=${PS1:-\$ }
+EDITOR=${EDITOR:-vi}
+VISUAL=${VISUAL:-$EDITOR}
+
 _chenv_exists() {
 	# Provide nice hint if env doesn't exist
 	if [[ ! -f "$1" ]]; then
