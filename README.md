@@ -30,6 +30,21 @@ Now, you can run `chenv vault` and be dropped into a shell with those
 variables set. At any time you can `exit` (or `^D`) to return to your
 normal shell.
 
+## Options ##
+
+chenv's `-h` option should tell you all that you need to know (note that my
+`$EDITOR` is `nvim` in this output):
+
+```sh
+$ chenv -h
+Usage: chenv [-l] [-c|-e] <env>
+    -l : list environments
+    -c : show an environment
+    -e : edit environment with nvim
+    -h : show help output
+```
+
+
 ## Protip: Storing Secrets ##
 
 `chenv` can also be used to securely handle secret environment variables!
